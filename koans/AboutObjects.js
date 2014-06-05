@@ -28,7 +28,7 @@ describe("About Objects", function () {
       }
     };
    
-    var battleCry = meglomaniac.battleCry(4);
+    battleCry = meglomaniac.battleCry(4);
     expect("They are Pinky and the Brain Brain Brain Brain").toMatch(battleCry);
   });
 
@@ -60,14 +60,14 @@ describe("About Objects", function () {
 
     it("should have the bomb", function () {
 
-      var hasBomb = "theBomb" in meglomaniac;
+      hasBomb = "theBomb" in meglomaniac;
      
       expect(hasBomb).toBe(true);
     });
 
     it("should not have the detonator however", function () {
 
-      var hasDetonator = "theDetonator" in meglomaniac;
+      hasDetonator = "theDetonator" in meglomaniac;
      
       expect(hasDetonator).toBe(false);
     });    
@@ -76,10 +76,10 @@ describe("About Objects", function () {
   it("should know that properties can be added and deleted", function () {
     var meglomaniac = { mastermind : "Agent Smith", henchman: "Agent Smith" };
 
-    expect("secretary" in meglomaniac).toBe(falesse
+    expect("secretary" in meglomaniac).toBe(false);
 
     meglomaniac.secretary = "Agent Smith";
-    expect("secretary" in meglomaniac).toBe("Agent Smith");
+    expect("secretary" in meglomaniac).toBe(true);
     
     delete meglomaniac.henchman;
     expect("henchman" in meglomaniac).toBe(false);
@@ -87,23 +87,23 @@ describe("About Objects", function () {
 
 
   it("should use prototype to add to all objects", function () {
-    function Circle(radius)
-    {
-      this.radius = radius;
-    }
+      function Circle(radius)
+      {
+        this.radius = radius;
+      }
 
-    var simpleCircle = new Circle(10);
-    var colouredCircle = new Circle(5);
-    colouredCircle.colour = "red";
+      var simpleCircle = new Circle(10);
+      var colouredCircle = new Circle(5);
+      colouredCircle.colour = "red";
+      
+      expect(simpleCircle.colour).toBe(undefined);
+      expect(colouredCircle.colour).toBe("red");
     
-    expect(simpleCircle.colour).toBe(undefined);
-    expect(colouredCircle.colour).toBe("red");
-  
-    Circle.prototype.describe = function () {
-      return "This circle has a radius of: " + this.radius;
-    };
-  
-    expect(simpleCircle.describe()).toBe("This circle has a radius of 10");
-    expect(colouredCircle.describe()).toBe("This circle has a radius of 5");
+      Circle.prototype.describe = function () {
+        return "This circle has a radius of: " + this.radius;
+      };
+    
+      expect(simpleCircle.describe()).toBe("This circle has a radius of: 10");
+      expect(colouredCircle.describe()).toBe("This circle has a radius of: 5");
   });
 });
